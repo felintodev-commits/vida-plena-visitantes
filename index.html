@@ -239,13 +239,13 @@
           <span class="check-text">✨ É a primeira vez que você nos visita?</span>
         </label>
         <label class="check-item">
-          <input type="checkbox" id="visita">
+          <input type="checkbox" id="contato">
           <span class="check-icon">
             <svg width="12" height="10" viewBox="0 0 12 10" fill="none">
               <path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </span>
-          <span class="check-text">🏠 Gostaria de receber uma visita?</span>
+          <span class="check-text">🏠 Podemos entrar em contato com você?</span>
         </label>
       </div>
 
@@ -273,8 +273,8 @@ function enviarWhats(e) {
   const telefone = document.getElementById('telefone').value.trim() || 'Não informado';
   const cidade   = document.getElementById('cidade').value.trim() || 'Não informado';
   const primeira = document.getElementById('primeira').checked ? 'Sim ✅' : 'Não';
-  const visita   = document.getElementById('visita').checked   ? 'Sim ✅' : 'Não';
-  const msg = `🙏 *Igreja Batista Vida Plena*\nNovo registro de visitante:\n\n👤 *Nome:* ${nome}\n📱 *Telefone:* ${telefone}\n📍 *Cidade / Bairro:* ${cidade}\n✨ *Primeira visita:* ${primeira}\n🏠 *Deseja receber visita:* ${visita}`;
+  const contato   = document.getElementById('contato').checked   ? 'Sim ✅' : 'Não';
+  const msg = `🙏 *Igreja Batista Vida Plena*\nNovo registro de visitante:\n\n👤 *Nome:* ${nome}\n📱 *Telefone:* ${telefone}\n📍 *Cidade / Bairro:* ${cidade}\n✨ *Primeira visita:* ${primeira}\n🏠 *Permite contato:* ${contato}`;
   window.location.href = `https://wa.me/5569992418676?text=${encodeURIComponent(msg)}`;
 }
 </script>
