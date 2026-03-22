@@ -4,77 +4,111 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vida Plena - Visitante</title>
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --blue: #3a7bd5;
-    --blue-dark: #2c5fa8;
+    --blue:       #3a7bd5;
+    --blue-dark:  #2c5fa8;
     --blue-light: #e8f0fb;
-    --gray: #5a6472;
-    --border: #dce4f0;
-    --white: #ffffff;
-    --shadow: 0 20px 60px rgba(42,80,160,0.18);
-    --green: #25D366;
+    --gray:       #5a6472;
+    --border:     #dce4f0;
+    --white:      #ffffff;
+    --shadow:     0 20px 60px rgba(42,80,160,0.22);
+    --green:      #25D366;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { height: 100%; }
+
+  /* FIX 3 + FIX 4: padding-top maior, scroll no body */
   body {
     font-family: 'Lato', sans-serif;
-    min-height: 100vh;
+    min-height: 100%;
+    background: linear-gradient(160deg, #2a50a0 0%, #3a7bd5 45%, #5b9de8 100%);
+    padding: 32px 16px 36px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    background: linear-gradient(160deg, #2a50a0 0%, #3a7bd5 45%, #5b9de8 100%);
-    padding: 12px 16px 24px;
     position: relative;
   }
+
   body::before, body::after {
     content: '';
     position: fixed;
     border-radius: 50%;
-    opacity: 0.08;
+    opacity: 0.07;
     background: white;
     pointer-events: none;
+    z-index: 0;
   }
   body::before { width: 500px; height: 500px; top: -150px; right: -150px; }
   body::after  { width: 350px; height: 350px; bottom: -100px; left: -100px; }
 
+  /* FIX 4: card estatico, sem scroll interno */
   .card {
+    position: relative;
+    z-index: 1;
     background: var(--white);
     border-radius: 24px;
     width: 100%;
-    max-width: 420px;
+    max-width: 440px;
     box-shadow: var(--shadow);
-    animation: slideUp 0.5s ease;
+    animation: slideUp 0.45s ease;
     overflow: hidden;
   }
+
   @keyframes slideUp {
-    from { opacity: 0; transform: translateY(30px); }
+    from { opacity: 0; transform: translateY(24px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── HEADER ── */
+  /* FIX 2: header sem imagem — identidade textual com icone SVG */
   .card-header {
-    padding: 14px 24px 12px;
+    padding: 22px 24px 16px;
     text-align: center;
     border-bottom: 1px solid var(--border);
+    background: linear-gradient(135deg, #f5f8ff 0%, #eaf0fd 100%);
+    border-radius: 24px 24px 0 0;
   }
-  .logo-wrap img {
-    width: 170px;
-    height: auto;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto 6px;
+
+  .church-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    box-shadow: 0 4px 16px rgba(42,80,160,0.28);
+  }
+  .church-icon svg { width: 30px; height: 30px; }
+
+  .church-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--blue-dark);
+    line-height: 1.25;
+    margin-bottom: 2px;
+  }
+  .church-sub {
+    font-size: 11.5px;
+    color: #8a9abf;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
   }
   .welcome {
     font-size: 13px;
     color: var(--gray);
-    line-height: 1.5;
+    line-height: 1.55;
   }
 
   /* ── BODY ── */
-  .card-body { padding: 16px 24px 12px; }
+  .card-body { padding: 18px 24px 12px; }
 
-  .field { margin-bottom: 10px; }
+  .field { margin-bottom: 11px; }
   .field label {
     display: block;
     font-size: 11px;
@@ -111,7 +145,7 @@
   .field textarea:focus {
     border-color: var(--blue);
     background: #fff;
-    box-shadow: 0 0 0 3px rgba(58,123,213,0.12);
+    box-shadow: 0 0 0 3px rgba(58,123,213,0.13);
   }
 
   /* ── DIVIDER ── */
@@ -119,7 +153,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    margin: 12px 0 10px;
+    margin: 13px 0 11px;
   }
   .divider span {
     font-size: 11px;
@@ -133,7 +167,7 @@
     content: ''; flex: 1; height: 1px; background: var(--border);
   }
 
-  /* ── CHECKBOXES ── */
+  /* ── CHECKBOX ── */
   .checks { display: flex; flex-direction: column; gap: 8px; }
   .check-item {
     display: flex;
@@ -167,9 +201,9 @@
   .check-item input:checked ~ .check-text { color: var(--blue-dark); font-weight: 700; }
   .check-text { font-size: 13.5px; color: var(--gray); line-height: 1.3; transition: color 0.2s; }
 
-  /* ── BOTÃO ── */
+  /* ── BOTAO ── */
   .btn-wrap { margin-top: 14px; }
-  button[type="submit"] {
+  .btn-enviar {
     width: 100%;
     padding: 15px;
     background: linear-gradient(135deg, var(--green) 0%, #1eba57 100%);
@@ -186,21 +220,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 9px;
   }
-  button[type="submit"]:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 28px rgba(37,211,102,0.45);
-  }
-  button[type="submit"]:active { transform: translateY(0); }
+  .btn-enviar:hover  { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,211,102,0.45); }
+  .btn-enviar:active { transform: translateY(0); }
   .wa-icon { width: 20px; height: 20px; flex-shrink: 0; }
 
   /* ── FOOTER ── */
   .card-footer {
-    padding: 8px 24px 16px;
+    padding: 8px 24px 18px;
     text-align: center;
   }
-  .card-footer p { font-size: 11.5px; color: #aab4c4; line-height: 1.5; }
+  .card-footer p { font-size: 11.5px; color: #aab4c4; line-height: 1.55; }
 
   /* ── TELA DE SUCESSO ── */
   .success-screen {
@@ -208,12 +239,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 48px 32px;
+    padding: 52px 32px;
     text-align: center;
     min-height: 360px;
-    animation: slideUp 0.5s ease;
   }
-  .success-screen.active { display: flex; }
+  .success-screen.active { display: flex; animation: slideUp 0.4s ease; }
   .success-icon {
     width: 80px; height: 80px;
     background: linear-gradient(135deg, #25D366, #1eba57);
@@ -223,25 +253,15 @@
     justify-content: center;
     margin-bottom: 20px;
     box-shadow: 0 8px 24px rgba(37,211,102,0.4);
-    animation: pop 0.4s ease 0.2s both;
+    animation: pop 0.4s ease 0.1s both;
   }
   @keyframes pop {
     from { transform: scale(0.5); opacity: 0; }
-    to   { transform: scale(1); opacity: 1; }
+    to   { transform: scale(1);   opacity: 1; }
   }
   .success-icon svg { width: 40px; height: 40px; }
-  .success-title {
-    font-size: 22px;
-    font-weight: 700;
-    color: #1a2e5a;
-    margin-bottom: 10px;
-  }
-  .success-msg {
-    font-size: 15px;
-    color: var(--gray);
-    line-height: 1.6;
-    margin-bottom: 28px;
-  }
+  .success-title { font-size: 22px; font-weight: 700; color: #1a2e5a; margin-bottom: 10px; }
+  .success-msg   { font-size: 15px; color: var(--gray); line-height: 1.6; margin-bottom: 28px; }
   .btn-nova {
     padding: 12px 28px;
     background: var(--blue-light);
@@ -258,16 +278,24 @@
 </style>
 </head>
 <body>
+
 <div class="card">
 
-  <!-- ════ FORMULÁRIO ════ -->
+  <!-- FORMULARIO -->
   <div id="form-view">
 
+    <!-- FIX 2: identidade textual com icone SVG, sem imagem quebrada -->
     <div class="card-header">
-      <div class="logo-wrap">
-        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCANPBYYDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9OGVSeQD9a5y9wL2Yf7RPtVxtakPWJB+NUJn86RnI5Y5O3+VetRhKDfMTdMvaMB50vHRR/OtNhhGz6ViWd2bNnICvvwPmqydXYgjy1weOtTUpylK6EZ3YVt6SCbIE4zvasZRk81ctr9rWHy1RXUEn5jg81rVi5RtEC9qP/HlJ+H86xSeTnirc+pSXERQxIFYfeGaq43D+tFKLgtQN+BFMEXyj7g6j2qhrKgLARxy1Mj1Z1RUEaEIMZz6VFd3rXmwMqrsz93nr/wDqrKNOSlcd0MthtuoccfOP510BbmuehfypEYDcVIbHvV7+1mP/ACzT8DTqwc3dIVyHU/8Aj7b02jpTtNH+lDOOFP8ASoriU3ExcrtJ+XavPFFvN9ml3hdxxjaeOtXyvkt1A2xjPQVhTY818/3j/WrZ1Zxz5S/99UyOwN0vnFwock4HOOtZQXs7uYE2kncJsgHG3r+NWrpQbWUY6o38qzxOdLkeMKJQwB3E4om1hmiZTCo3Arnd0zxUyhKUuaKAwQMVv6WM2EJ4z838zWGV7dKtW+rNaQJH5asFz8xOOvP9a7a0XNWiTez1LOu4FmmR/GBx9DWFE376MHp5ij9RV691J7yMI0aIM7s55z9KphcMD3BB/KtKUXGNmLqdMVAY8A1zuvnGoYAwNg6VabXJQSRFGfxNZ99cNezGVlCHAG3kDj3NTRhKMrsLon8PkG9kBGT5f9RXRADPQYrlbK5NlMZFVWLAqc8cZB/p+tXv7ekX/lip/E0q1OU5XigW5lP/AKyT6n+dbmhACyY9/MP8hWExLMx45OavWepyWMRjWNHBbOWz/ntXRVi5Q5ULY1NWUCwk4Hbt7iufYnbV651aS6hMRiVQ3pk9KpBSxwelFGLhGzGdVEieXGdq/dX+H2rM13Divbj8TW1ZXkUkCrJIqEnjPt7VQvr2F7Odkkjck5Cg/KRjqKzhTkpXEtCCoIY97AA84FWaCMg9yKvXVDP/9k=" alt="Igreja Batista Vida Plena">
+      <div class="church-icon">
+        <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="12.5" y="2"  width="5"  height="18" rx="1.5" fill="white"/>
+          <rect x="5"    y="8"  width="20" height="5"  rx="1.5" fill="white"/>
+          <path d="M7 28 C7 22 23 22 23 28" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        </svg>
       </div>
-      <p class="welcome">Seja muito bem-vindo! 🙏<br>Sua presença é muito importante para nós.</p>
+      <p class="church-name">Igreja Batista Vida Plena</p>
+      <p class="church-sub">Novo Horizonte &bull; Porto Velho/RO</p>
+      <p class="welcome">Seja muito bem-vindo! &#x1F64F;<br>Sua presen&#xe7;a &#xe9; muito importante para n&#xf3;s.</p>
     </div>
 
     <div class="card-body">
@@ -288,8 +316,8 @@
       </div>
 
       <div class="field">
-        <label>Pedido de Oração <span>(opcional)</span></label>
-        <textarea id="oracao" placeholder="Deixe seu pedido de oração aqui..."></textarea>
+        <label>Pedido de Ora&#xe7;&#xe3;o <span>(opcional)</span></label>
+        <textarea id="oracao" placeholder="Deixe seu pedido de ora&#xe7;&#xe3;o aqui..."></textarea>
       </div>
 
       <div class="divider"><span>Mais sobre sua visita</span></div>
@@ -302,12 +330,12 @@
               <path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </span>
-          <span class="check-text">📞 Podemos entrar em contato com você?</span>
+          <span class="check-text">&#x1F4DE; Podemos entrar em contato com voc&#xea;?</span>
         </label>
       </div>
 
       <div class="btn-wrap">
-        <button type="submit" onclick="enviarWhats(event)">
+        <button class="btn-enviar" onclick="enviarWhats(event)">
           <svg class="wa-icon" viewBox="0 0 24 24" fill="white">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
           </svg>
@@ -318,27 +346,65 @@
     </div>
 
     <div class="card-footer">
-      <p>Preencha apenas se se sentir à vontade 😊<br>Todos os campos são opcionais.</p>
+      <p>Preencha apenas se se sentir &#xe0; vontade &#x1F60A;<br>Todos os campos s&#xe3;o opcionais.</p>
     </div>
 
   </div><!-- /form-view -->
 
-  <!-- ════ TELA DE SUCESSO ════ -->
+  <!-- TELA DE SUCESSO -->
   <div class="success-screen" id="success-view">
     <div class="success-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M20 6L9 17l-5-5"/>
       </svg>
     </div>
-    <p class="success-title">Obrigado! 🙏</p>
-    <p class="success-msg">Ficamos felizes em te receber 😊<br>Que Deus abençoe sua semana!</p>
+    <p class="success-title">Obrigado! &#x1F64F;</p>
+    <p class="success-msg">Ficamos felizes em te receber &#x1F60A;<br>Que Deus aben&#xe7;oe sua semana!</p>
     <button class="btn-nova" onclick="reiniciar()">Novo registro</button>
   </div>
 
 </div><!-- /card -->
 
 <script>
-  /* ── MÁSCARA TELEFONE ── */
+  /* VALIDACAO: checkbox de contato so pode ser marcado com telefone preenchido */
+  var checkContato = document.getElementById('contato');
+  var checkItem    = checkContato.closest ? checkContato.closest('.check-item') : checkContato.parentNode;
+
+  checkContato.addEventListener('change', function () {
+    var tel = document.getElementById('telefone').value.replace(/\D/g, '');
+    if (this.checked && tel.length < 10) {
+      this.checked = false;
+      /* Destaca o campo telefone */
+      var telField = document.getElementById('telefone');
+      telField.style.borderColor = '#e05252';
+      telField.style.background  = '#fff0f0';
+      telField.style.boxShadow   = '0 0 0 3px rgba(224,82,82,0.15)';
+      telField.focus();
+      /* Mostra aviso embaixo do campo */
+      var aviso = document.getElementById('aviso-tel');
+      if (!aviso) {
+        aviso = document.createElement('p');
+        aviso.id = 'aviso-tel';
+        aviso.style.cssText = 'font-size:11.5px;color:#e05252;margin-top:4px;padding-left:2px;';
+        telField.parentNode.appendChild(aviso);
+      }
+      aviso.textContent = 'Preencha o telefone para permitir contato.';
+      /* Remove aviso e destaque quando usuario preencher o telefone */
+      telField.addEventListener('input', function limpar() {
+        var t = telField.value.replace(/\D/g, '');
+        if (t.length >= 10) {
+          telField.style.borderColor = '';
+          telField.style.background  = '';
+          telField.style.boxShadow   = '';
+          var av = document.getElementById('aviso-tel');
+          if (av) { av.parentNode.removeChild(av); }
+          telField.removeEventListener('input', limpar);
+        }
+      });
+    }
+  });
+
+  /* MASCARA TELEFONE */
   var telInput = document.getElementById('telefone');
   telInput.addEventListener('input', function () {
     var raw = this.value.replace(/\D/g, '').slice(0, 11);
@@ -357,40 +423,53 @@
     this.value = v;
   });
 
-  /* ── ENVIO ── */
+  /* ENVIO
+     FIX 1: emojis como pares surrogate Unicode — evita o simbolo "?" no WhatsApp
+  */
   function enviarWhats(e) {
     e.preventDefault();
 
-    var nome     = document.getElementById('nome').value.trim()     || 'Não informado';
-    var telefone = document.getElementById('telefone').value.trim() || 'Não informado';
-    var cidade   = document.getElementById('cidade').value.trim()   || 'Não informado';
+    var nome     = document.getElementById('nome').value.trim()     || 'N\u00e3o informado';
+    var telefone = document.getElementById('telefone').value.trim() || 'N\u00e3o informado';
+    var cidade   = document.getElementById('cidade').value.trim()   || 'N\u00e3o informado';
     var oracao   = document.getElementById('oracao').value.trim()   || '';
-    var contato  = document.getElementById('contato').checked ? 'Sim' : 'Não';
+    var contato  = document.getElementById('contato').checked ? 'Sim' : 'N\u00e3o';
 
     var now = new Date();
-    var dataFormatada = now.toLocaleDateString('pt-BR');
-    var horaFormatada = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    var dataFmt = now.toLocaleDateString('pt-BR');
+    var horaFmt = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+    /* Emojis via pares surrogate (funciona em todos os navegadores) */
+    var PRAY  = '\uD83D\uDE4F';  /* 🙏 */
+    var CAL   = '\uD83D\uDCC5';  /* 📅 */
+    var CLOCK = '\u23F0';        /* ⏰ */
+    var PERS  = '\uD83D\uDC64';  /* 👤 */
+    var PHONE = '\uD83D\uDCF1';  /* 📱 */
+    var PIN   = '\uD83D\uDCCD';  /* 📍 */
+    var CALL  = '\uD83D\uDCDE';  /* 📞 */
 
     var msg =
-      '\uD83D\uDE4F *Igreja Batista Vida Plena*\n' +
-      'Novo registro de visitante:\n\n' +
-      '\uD83D\uDCC5 *Data:* ' + dataFormatada + '\n' +
-      '\u23F0 *Hora:* ' + horaFormatada + '\n\n' +
-      '\uD83D\uDC64 *Nome:* ' + nome + '\n' +
-      '\uD83D\uDCF1 *Telefone:* ' + telefone + '\n' +
-      '\uD83D\uDCCD *Cidade / Bairro:* ' + cidade + '\n' +
-      '\uD83D\uDCDE *Permite contato:* ' + contato;
+      PRAY  + ' *Igreja Batista Vida Plena*\n'    +
+      'Novo registro de visitante:\n\n'            +
+      CAL   + ' *Data:* '            + dataFmt + '\n' +
+      CLOCK + ' *Hora:* '            + horaFmt + '\n\n' +
+      PERS  + ' *Nome:* '            + nome    + '\n' +
+      PHONE + ' *Telefone:* '        + telefone + '\n' +
+      PIN   + ' *Cidade / Bairro:* ' + cidade  + '\n' +
+      CALL  + ' *Permite contato:* ' + contato;
 
     if (oracao) {
-      msg += '\n\n\uD83D\uDE4F *Pedido de Oracao:*\n' + oracao;
+      msg += '\n\n' + PRAY + ' *Pedido de Ora\u00e7\u00e3o:*\n' + oracao;
     }
 
-    /* Mostra tela de sucesso ANTES de abrir WhatsApp */
     mostrarSucesso();
 
     setTimeout(function () {
-      window.location.href = 'https://wa.me/5569992418676?text=' + encodeURIComponent(msg);
-    }, 800);
+      window.open(
+        'https://wa.me/5569992418676?text=' + encodeURIComponent(msg),
+        '_blank'
+      );
+    }, 700);
   }
 
   function mostrarSucesso() {
@@ -400,10 +479,10 @@
   }
 
   function reiniciar() {
-    document.getElementById('nome').value = '';
-    document.getElementById('telefone').value = '';
-    document.getElementById('cidade').value = '';
-    document.getElementById('oracao').value = '';
+    document.getElementById('nome').value      = '';
+    document.getElementById('telefone').value  = '';
+    document.getElementById('cidade').value    = '';
+    document.getElementById('oracao').value    = '';
     document.getElementById('contato').checked = false;
 
     document.getElementById('success-view').classList.remove('active');
