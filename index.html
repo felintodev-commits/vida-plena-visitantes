@@ -222,8 +222,8 @@
       </div>
 
       <div class="field">
-        <label>Endereço <span>(Opcional)</span></label>
-        <input type="text" id="cidade" placeholder="Seu Endereço Completo?">
+        <label>Cidade / Bairro<span>(Opcional)</span></label>
+        <input type="text" id="cidade" placeholder="Informe sua cidade ou bairro">
       </div>
 
       <div class="divider"><span>Mais sobre sua visita</span></div>
@@ -274,7 +274,7 @@ function enviarWhats(e) {
   const cidade   = document.getElementById('cidade').value.trim() || 'Não informado';
   const primeira = document.getElementById('primeira').checked ? 'Sim ✅' : 'Não';
   const visita   = document.getElementById('visita').checked   ? 'Sim ✅' : 'Não';
-  const msg = `🙏 *Igreja Batista Vida Plena*\nNovo registro de visitante:\n\n👤 *Nome:* ${nome}\n📱 *Telefone:* ${telefone}\n📍 *Endereço:* ${cidade}\n✨ *Primeira visita:* ${primeira}\n🏠 *Deseja receber visita:* ${visita}`;
+  const msg = `🙏 *Igreja Batista Vida Plena*\nNovo registro de visitante:\n\n👤 *Nome:* ${nome}\n📱 *Telefone:* ${telefone}\n📍 *Cidade / Bairro:* ${cidade}\n✨ *Primeira visita:* ${primeira}\n🏠 *Deseja receber visita:* ${visita}`;
   window.location.href = `https://wa.me/5569992418676?text=${encodeURIComponent(msg)}`;
 }
 </script>
