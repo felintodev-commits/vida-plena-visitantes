@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vida Plena - Visitante</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #6a5acd, #4a90e2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+p {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+label {
+  font-size: 14px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #357abd;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+  <h2>Queremos te conhecer melhor</h2>
+  <p>Seja muito bem-vindo! Sua presença é muito importante para nós.</p>
+
+  <form onsubmit="enviarWhats(event)">
+    <input type="text" id="nome" placeholder="Nome (opcional)">
+    <input type="text" id="telefone" placeholder="Telefone (opcional)">
+    <input type="text" id="cidade" placeholder="Cidade/Bairro (opcional)">
+
+    <label><input type="checkbox" id="primeira"> Primeira vez?</label><br>
+    <label><input type="checkbox" id="visita"> Deseja receber uma visita?</label><br>
+
+    <button type="submit">Enviar</button>
+  </form>
+
+  <p style="font-size:12px;">Preencha apenas se se sentir à vontade 😊</p>
+</div>
+
+<script>
+function enviarWhats(e){
+  e.preventDefault();
+
+  let nome = document.getElementById('nome').value;
+  let telefone = document.getElementById('telefone').value;
+  let cidade = document.getElementById('cidade').value;
+  let primeira = document.getElementById('primeira').checked ? 'Sim' : 'Não';
+  let visita = document.getElementById('visita').checked ? 'Sim' : 'Não';
+
+  let msg = `Novo visitante - Igreja Batista Vida Plena:
+
+Nome: ${nome}
+Telefone: ${telefone}
+Cidade/Bairro: ${cidade}
+Primeira vez: ${primeira}
+Deseja visita: ${visita}`;
+
+  let url = `https://wa.me/5569992395714?text=${encodeURIComponent(msg)}`;
+
+  window.open(url, '_blank');
+}
+</script>
+
+</body>
+</html>
